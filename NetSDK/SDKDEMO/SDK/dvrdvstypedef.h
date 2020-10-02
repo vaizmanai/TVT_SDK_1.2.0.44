@@ -72,10 +72,10 @@ typedef enum _dd_frame_type_
 	DD_FRAME_TYPE_AUDIO_FORMAT		= 0x06,
 	DD_FRAME_TYPE_TALK_AUDIO_FORMAT	= 0x07,
 
-	DD_FRAME_TYPE_EVENT				= 0x08,
-	DD_FRAME_TYPE_TEXT				= 0x09,
+	DD_FRAME_TYPE_RESV1				= 0x08,
+	DD_FRAME_TYPE_RESV2				= 0x09,
 
-	DD_FRAME_TYPE_END
+	DD_FRAME_TYPE_END				= 0x0a,
 }DD_FRAME_TYPE;
 
 typedef enum _dd_frame_attrib_
@@ -109,6 +109,7 @@ typedef enum _dd_video_size_
 	DD_VIDEO_SIZE_480P	= 0x0100,	//480P
 	DD_VIDEO_SIZE_720P	= 0x0200,	//720P
 	DD_VIDEO_SIZE_1080P	= 0x0400,	//1080P
+	DD_VIDEO_SIZE_960H  = 0x0800,   //960H
 }DD_VIDEO_SIZE;
 
 //按位保存，最多只能为32个。
@@ -186,6 +187,7 @@ typedef enum _dd_time_zone_name_
 	DD_TIME_ZONE_GMT_A11,
 	DD_TIME_ZONE_GMT_A12,
 	DD_TIME_ZONE_GMT_A13,
+	DD_TIME_ZONE_NUM,
 }DD_TIME_ZOME_NAME;
 
 //三级用户权限，每级用户具有默认权限，但是可以向下调节具体权限（不能向上调节）。

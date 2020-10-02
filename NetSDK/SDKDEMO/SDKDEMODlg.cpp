@@ -421,8 +421,8 @@ void CSDKDEMODlg::OnBnClickedButtonLogtest()
 	//test
 	//µÇÂ¼
 	CLoginDlg loginDlg;	
-	loginDlg.SetIp("192.168.3.117");
-	loginDlg.SetPort(6036);
+	loginDlg.SetIp("192.168.0.106");
+	loginDlg.SetPort(9008);
 
 	while(true)
 	{

@@ -177,6 +177,21 @@ typedef struct _dd_time_
 	int				nMicrosecond;	//微秒
 }DD_TIME, *LP_DD_TIME;
 
+//记录时间的结构体
+typedef struct _dd_time_ex_
+{
+    unsigned char	second;		//Seconds after minute (0–59)
+    unsigned char	minute;		//Minutes after hour (0–59)
+    unsigned char	hour;		//Hours since midnight (0–23)
+    unsigned char	wday;		//Day of week (0–6; Sunday = 0)
+    unsigned char	mday;		//Day of month (1–31)
+    unsigned char	month;		//Month (1–12; January = 1)
+    unsigned short	year;		//Year (current year )
+    int				nTotalseconds;		//总秒数
+    int				nMicrosecond;	//微秒
+}DD_TIME_EX;//与DD_TIME的区别在于，DD_TIME中month、year赋值不同
+
+
 //记录年月日的结构体
 typedef struct _dd_date_
 {
@@ -187,10 +202,10 @@ typedef struct _dd_date_
 
 typedef struct _dd_frame_info_
 {
-	unsigned long		frameType;	//帧类型，取值参考DD_FRAME_TYPE
-	unsigned long		length;
+	unsigned int		frameType;	//帧类型，取值参考DD_FRAME_TYPE
+	unsigned int		length;
 
-	unsigned long		keyFrame;	//0 不是关键帧
+	unsigned int		keyFrame;	//0 不是关键帧
 
 	unsigned short      width;
 	unsigned short      height;
@@ -200,11 +215,11 @@ typedef struct _dd_frame_info_
 	unsigned short		deviceIndex;
 	unsigned short      channel;
 
-	unsigned long       bufIndex;
-	unsigned long		frameIndex;		//帧索引
+	unsigned int       bufIndex;
+	unsigned int		frameIndex;		//帧索引
 
-	unsigned long		frameAttrib;	//帧属性，取值为DD_FRAME_ATTRIB中定义的各值的组合
-	unsigned long		streamID;
+	unsigned int		frameAttrib;	//帧属性，取值为DD_FRAME_ATTRIB中定义的各值的组合
+	unsigned int		streamID;
 
 	LONGLONG			time;			//在帧绝对时间，年月日时分秒毫秒，在改变设备时间时会变化
 	LONGLONG			relativeTime;	//相对时间，在改变设备时间时不会变化，是个连续的时间
@@ -214,17 +229,17 @@ typedef struct _dd_frame_info_
 
 typedef struct _dd_log_info_
 {
-	unsigned long	majorType;		//主类型，取值参考DD_LOG_CONTENT
-	unsigned long	minorType;		//子类型，取值参考DD_LOG_TYPE
+	unsigned int	majorType;		//主类型，取值参考DD_LOG_CONTENT
+	unsigned int	minorType;		//子类型，取值参考DD_LOG_TYPE
 
-	unsigned long	time;			//该日志发生时间
+	unsigned int	time;			//该日志发生时间
 
-	unsigned long	IP;				//产生该日志时用户IP
+	unsigned int	IP;				//产生该日志时用户IP
 	char			name [36];		//该日志对应地用户名称
 
 	DD_TIME			localTime;		//设备当地时间，后期填写
 
-	unsigned long	infoLen;
+	unsigned int	infoLen;
 	char			info[1024];
 }DD_LOG_INFO, *LP_DD_LOG_INFO;
 
@@ -243,10 +258,10 @@ typedef struct _dd_record_log_
 	unsigned short	deviceID;		//设备序号
 	unsigned short	cameraID;		//摄像头序号
 	
-	unsigned long	channel;		//虚拟通道号
-	unsigned long	type;			//录像类型，取值参考DD_RECORD_TYPE
+	unsigned int	channel;		//虚拟通道号
+	unsigned int	type;			//录像类型，取值参考DD_RECORD_TYPE
 	
-	unsigned long	size;			//该段录像数据长度
+	unsigned int	size;			//该段录像数据长度
 
 	DD_TIME			startTime;		//起始时间
 	DD_TIME			endTime;		//结束时间
@@ -256,10 +271,36 @@ typedef struct _dd_record_log_
 
 typedef struct _dd_cruise_point_info
 {
-	unsigned long			presetIndex;
-	unsigned long			dwellSpeed;
-	unsigned long			dwellTime;
+	unsigned int			presetIndex;
+	unsigned int			dwellSpeed;
+	unsigned int			dwellTime;
 }DD_CRUISE_POINT_INFO;
 
+typedef struct _dd_ch_cruise_
+{
+    unsigned int			channel;
+    unsigned int			cruiseIndex;
+    unsigned char           cruiseName[64];
+}DD_CH_CRUISE;
+
+typedef struct _dd_ptz_preset_config_ex_
+{
+    unsigned int channel;		//通道
+    unsigned int presetIndex;//预置点下标
+    unsigned char presetName[64];//预置点
+}DD_PTZ_PRESET_CONFIG_Ex;
+
+
+//3D云台控制参数
+typedef struct 
+{
+	int selBeginX;		//鼠标拖选方框起始点的x坐标（相对于当前窗口左上角）
+	int selBeginY;		//鼠标拖选方框结束点的y坐标（相对于当前窗口左上角）
+	int selEndX;		//鼠标拖选方框结束点的x坐标（相对于当前窗口左上角）
+	int selEndY;		//鼠标拖选方框结束点的y坐标（相对于当前窗口左上角）
+	int displayWidth;	//图像显示区域宽度
+	int displayHeight; 	//图像显示区域高度
+	int reserve[2];		//保留
+}PTZ_3D_POINT_INFO, *LPPTZ_3D_POINT_INFO;
 
 #endif //__DVR_DVS_DEFINE_H__

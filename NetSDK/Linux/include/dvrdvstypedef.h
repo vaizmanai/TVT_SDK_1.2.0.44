@@ -14,6 +14,7 @@
 #ifdef WIN32 ////////////////////如果是Windows平台
 #include "stdafx.h"
 typedef DWORD				THREAD_ID;
+typedef long                POINTERHANDLE;
 
 //定义PACKED 主要用于解决在Windows解决对奇一般使用#pragma pack(n)而Linux下一般使用__attribute__((packed))
 //在此结构体要写入文件或者在跨平台之间访问时才需要以下定义，注意__attribute__((packed))只用于单字节对齐
@@ -25,12 +26,50 @@ typedef DWORD				THREAD_ID;
 #define PACKED __attribute__((packed))
 
 typedef pid_t				THREAD_ID;
-typedef unsigned long       DWORD, *LPDWORD;
-typedef unsigned long       ULONG;
+typedef unsigned int       DWORD, *LPDWORD;
+typedef unsigned int       ULONG;
+//大概检查了内部LONG的使用，发现很多地方将指针直接转给LONG,且某些地方LONG值可能为负值，最稳妥的定义成long long
+#if defined (__ENVIRONMENT_LINUX_ANDROID__) || defined (__ENVIRONMENT_IOS__)
+    typedef int                LONG;
+#else
+    #if defined(OS_IS_64BIT)
+        typedef long long               LONG;
+    #else
+        typedef long                LONG;
+    #endif
+#endif
 
-typedef long                LONG;
+//手机端handle用的long long，win，linux端用的LONG。现为了统一一套代码且不影响客户，定义POINTERHANDLE来兼容
+#if defined (__ENVIRONMENT_LINUX_ANDROID__) || defined (__ENVIRONMENT_IOS__)
+    typedef long long                POINTERHANDLE;
+#else
+    #if defined(OS_IS_64BIT)
+        typedef long long               POINTERHANDLE;
+    #else
+        typedef long                POINTERHANDLE;
+    #endif
+#endif
+
+
 typedef unsigned long long  ULONGLONG;
+
+
+//zld 2016/10/22
+#ifdef __ENVIRONMENT_IOS__
+
+#if (TARGET_OS_IPHONE && __LP64__)  ||  TARGET_OS_WATCH
+#define OBJC_BOOL_IS_BOOL 1
+typedef bool BOOL;
+#else
+#define OBJC_BOOL_IS_CHAR 1
+typedef signed char BOOL;  //wyf
+//typedef bool BOOL;
+#endif
+
+#else
 typedef bool                BOOL;
+#endif
+
 typedef unsigned char       BYTE;
 typedef unsigned short      WORD;
 typedef int                 INT;
@@ -62,20 +101,20 @@ typedef enum _dd_video_format_
 
 typedef enum _dd_frame_type_
 {
-	DD_FRAME_TYPE_NONE				= 0x00,
-	DD_FRAME_TYPE_VIDEO				= 0x01,
-	DD_FRAME_TYPE_AUDIO				= 0x02,
-	DD_FRAME_TYPE_TALK_AUDIO		= 0x03,
-	DD_FRAME_TYPE_JPEG				= 0x04,
+	DD_FRAME_TYPE_NONE				= 0x00,//空类型数据帧
+	DD_FRAME_TYPE_VIDEO				= 0x01,//视频数据帧
+	DD_FRAME_TYPE_AUDIO				= 0x02,//音频数据帧
+	DD_FRAME_TYPE_TALK_AUDIO		= 0x03,//对讲音频数据帧
+	DD_FRAME_TYPE_JPEG				= 0x04,//JPEG图片流数据帧
 
-	DD_FRAME_TYPE_VIDEO_FORMAT		= 0x05,
-	DD_FRAME_TYPE_AUDIO_FORMAT		= 0x06,
-	DD_FRAME_TYPE_TALK_AUDIO_FORMAT	= 0x07,
+	DD_FRAME_TYPE_VIDEO_FORMAT		= 0x05,//视频格式帧
+	DD_FRAME_TYPE_AUDIO_FORMAT		= 0x06,//音频格式帧
+	DD_FRAME_TYPE_TALK_AUDIO_FORMAT	= 0x07,//对讲音频格式帧
 
-	DD_FRAME_TYPE_EVENT				= 0x08,
-	DD_FRAME_TYPE_TEXT				= 0x09,
+	DD_FRAME_TYPE_RESV1				= 0x08,
+	DD_FRAME_TYPE_RESV2				= 0x09,
 
-	DD_FRAME_TYPE_END
+	DD_FRAME_TYPE_END				= 0x0a,
 }DD_FRAME_TYPE;
 
 typedef enum _dd_frame_attrib_
@@ -109,6 +148,15 @@ typedef enum _dd_video_size_
 	DD_VIDEO_SIZE_480P	= 0x0100,	//480P
 	DD_VIDEO_SIZE_720P	= 0x0200,	//720P
 	DD_VIDEO_SIZE_1080P	= 0x0400,	//1080P
+	DD_VIDEO_SIZE_960H  = 0x0800,   //960H
+
+	DD_VIDEO_SIZE_960P   = 0x01000,	//(1280 X 960)
+	DD_VIDEO_SIZE_SXGA   = 0x02000,	//(1280 X 1024)
+	DD_VIDEO_SIZE_3M     = 0x04000,	//(2048 X 1536)
+
+	DD_VIDEO_SIZE_16_9_3M     = 0x10000,	//(2304 X 1296)
+	DD_VIDEO_SIZE_2K          = 0x20000,	//(2560 X 1440)
+	DD_VIDEO_SIZE_HDLITE      = 0x40000,	//(960 X 1080)
 }DD_VIDEO_SIZE;
 
 //按位保存，最多只能为32个。
@@ -117,6 +165,13 @@ typedef enum _dd_video_encode_mode_
 	DD_VIDEO_ENCODE_MODE_VBR	=	0x01,	//变码流
 	DD_VIDEO_ENCODE_MODE_CBR	=	0x02	//固定码流
 }DD_VIDEO_ENCODE_MODE;
+
+typedef enum _dd_video_encode_format_
+{
+    DD_VIDEO_ENCODE_FORMAT_H264	=	0x0,
+    DD_VIDEO_ENCODE_FORMAT_H265	=	0x01,
+    DD_VIDEO_ENCODE_FORMAT_MJPEG=	0x02,
+}DD_VIDEO_ENCODE_FORMAT;
 
 typedef enum _dd_image_quality_
 {
@@ -140,6 +195,23 @@ typedef enum _dd_vga_resolution_
 	DD_VGA_1280X960		= 0x0020,
 	DD_VGA_1280X1024	= 0x0040,
 	DD_VGA_1920X1080	= 0x0080,
+	DD_VGA_320X240		= 0x0100,
+	DD_VGA_352X240		= 0x0200,
+	DD_VGA_480X240		= 0x0400,
+	DD_VGA_704X480		= 0x0800,
+	DD_VGA_704X576		= 0x1000,
+	DD_VGA_960X480		= 0x2000,
+	DD_VGA_960X576		= 0x4000,
+	DD_VGA_960X1080		= 0x8000,
+	DD_VGA_1280X720		= 0x00010000,
+	DD_VGA_1600X1200	= 0x00020000,
+	DD_VGA_1920X1536	= 0x00040000,
+	DD_VGA_2048X1536	= 0x00080000,
+	DD_VGA_2304X1296	= 0x00100000,
+	DD_VGA_2560X1440	= 0x00200000,
+	DD_VGA_2592X1520	= 0x00400000,
+	DD_VGA_2592X1944	= 0x00800000,
+	DD_VGA_3840X2160	= 0x01000000,
 }DD_VGA_RESOLUTION;
 
 //显示年月日的模式
@@ -186,6 +258,7 @@ typedef enum _dd_time_zone_name_
 	DD_TIME_ZONE_GMT_A11,
 	DD_TIME_ZONE_GMT_A12,
 	DD_TIME_ZONE_GMT_A13,
+	DD_TIME_ZONE_NUM,
 }DD_TIME_ZOME_NAME;
 
 //三级用户权限，每级用户具有默认权限，但是可以向下调节具体权限（不能向上调节）。
@@ -207,6 +280,17 @@ typedef enum _dd_record_type_
 	DD_RECORD_TYPE_SENSOR	= 0x0008,			//传感器报警录像
 
 	DD_RECORD_TYPE_BEHAVIOR = 0x0010,			//行为分析报警录像
+    DD_RECORD_TYPE_SHELTER     = 0x20,		//遮挡报警
+    DD_RECORD_TYPE_OVERSPEED   = 0x40,		//超速
+    DD_RECORD_TYPE_OVERBOUND   = 0x80,		//越界
+    DD_RECORD_TYPE_OSC         = 0x0100,     //物品看护侦测录像
+    DD_RECORD_TYPE_AVD         = 0x0200,     //异常侦测
+    DD_RECORD_TYPE_TRIPWIRE    = 0x0400,     //越界侦测
+    DD_RECORD_TYPE_PERIMETER   = 0x0800,     //区域入侵侦测
+    DD_RECORD_TYPE_VFD         = 0x1000,     //人脸识别
+    DD_RECORD_TYPE_POS         = 0x2000,     //POS
+    DD_RECORD_TYPE_INTELLIGENT = DD_RECORD_TYPE_OSC | DD_RECORD_TYPE_AVD | DD_RECORD_TYPE_TRIPWIRE | DD_RECORD_TYPE_PERIMETER | DD_RECORD_TYPE_VFD,
+    DD_RECORD_TYPE_ALL         = 0xFFFFFFFF, //所有的录像类型
 }DD_RECORD_TYPE;
 
 typedef enum _dd_behavior_type_
@@ -233,6 +317,14 @@ typedef enum _dd_log_content_
 	DD_LOG_CONTENT_EVENT_INFO		= 0x00000040,
 	DD_LOG_CONTENT_ERROR_INFO		= 0x00000080
 }DD_LOG_CONTENT;
+
+typedef enum _dd_event_type_
+{
+	DD_EVENT_TYPE_MOTION    = 0x00000001,		//移动侦测
+	DD_EVENT_TYPE_SENSOR    = 0x00000002,		//传感器报警
+	DD_EVENT_TYPE_V_LOSS    = 0x00000004,		//视频丢失
+	DD_EVENT_TYPE_V_COVER   = 0x00000008,		//视频遮挡
+}DD_EVENT_TYPE;
 
 typedef enum _dd_log_type_
 {
@@ -493,8 +585,115 @@ typedef enum
 	DD_PTZ_TYPE_TRACE	= 3,
 }DD_PTZ_TYPE;
 
-const unsigned long DD_INVALID_CLIENT_ID	= (~0x0);
-const unsigned long DD_LOCAL_CLIENT_ID		= 0;
-const unsigned long DD_LOCAL_DEVICE_ID		= 0;
+//////////////////////////////////////////////////////////////////////////
+//以下为N9000相关类型
+typedef enum _n9000_log_type
+{
+	//全部类型
+	//	LOG_ALL,
+
+	//报警日志
+	//	LOG_ALARM_ALL,
+	LOG_ALARM_MOTION = 0x100,			//移动侦测报警
+	LOG_ALARM_SENSOR,					//传感器报警
+	LOG_ALARM_ALARMOUTPUT,				//报警输出	
+
+	//操作日志
+	//	LOG_OPERATE_ALL,
+	LOG_OPERATE_RECORD_SPB,				//录像检索/回放/备份
+	LOG_OPERATE_MANUAL_RECORD,			//手动录像
+	LOG_OPERATE_MANUAL_ALARM,			//手动报警
+	LOG_OPERATE_SYSTEM_MAINTENANCE,		//系统维护
+	LOG_OPERATE_PTZ_CONTROL,			//云台控制
+	LOG_OPERATE_AUDIO_TALK,				//语音对讲
+	LOG_OPERATE_SYSTEM_SCR,				//开关机
+	LOG_OPERATE_LOGIN_LOGOUT,			//登录/登出
+	LOG_OPERATE_SNAPSHOT_MSPB,			//图片
+	LOG_OPERATE_FORMAT_HD,				//格式化磁盘
+
+	//设置日志
+	//	LOG_CONFIG_ALL,
+	LOG_CONFIG_CHANNEL,					//通道参数
+	LOG_CONFIG_RECORD,					//录像参数
+	LOG_CONFIG_ALARM,					//报警参数
+	LOG_CONFIG_DISK,					//磁盘参数
+	LOG_CONFIG_NETWORK,					//网络参数
+	LOG_CONFIG_SCHEDULE,				//排程参数
+	LOG_CONFIG_USER,					//用户参数
+	LOG_CONFIG_BASIC,					//基本配置
+
+	//异常日志
+	//	LOG_EXCEPTION_ALL,
+	LOG_EXCEPTION_UNLAWFUL_ACCESS,		//非法访问
+	LOG_EXCEPTION_DISK_FULL,			//磁盘满
+	LOG_EXCEPTION_DISK_IO_ERROR,		//磁盘读写出错
+	LOG_EXCEPTION_IP_COLLISION,			//IP地址冲突
+	LOG_EXCEPTION_INTERNET_DISCONNECT,	//网络断开
+	LOG_EXCEPTION_IPC_DISCONNECT,		//前端掉线
+	LOG_EXCEPTION_ABNORMAL_SHUTDOWN,	//系统异常关机
+	LOG_EXCEPTION_NO_DISK,				//无磁盘
+	LOG_EXCEPTION_VIDEO_LOSS,			//视频丢失
+}N9000_LOG_TYPE;
+
+typedef enum _n9000_log_major_type
+{
+	LOG_ALL		= 0x01,//全部类型
+	LOG_ALARM_ALL,		//报警日志
+	LOG_OPERATE_ALL,	//操作日志
+	LOG_CONFIG_ALL,		//设置日志
+	LOG_EXCEPTION_ALL,	//异常日志
+	LOG_INFOR_ALL,		//其它日志
+	LOG_MAJOR_TYPE_END,
+}N9000_LOG_MAJOR_TYPE;
+
+//按位保存。最多不能超过32个
+typedef enum _dd_video_size_n9000_
+{
+	DD_VIDEO_SIZE_640X480		= 0x0001,
+	DD_VIDEO_SIZE_720X480		= 0x0002,
+	DD_VIDEO_SIZE_720X576		= 0x0004,
+	DD_VIDEO_SIZE_800X600		= 0x0008,
+	DD_VIDEO_SIZE_1024X768		= 0x0010,
+	DD_VIDEO_SIZE_1280X960		= 0x0020,
+	DD_VIDEO_SIZE_1280X1024		= 0x0040,
+	DD_VIDEO_SIZE_1920X1080		= 0x0080,
+	DD_VIDEO_SIZE_320X240		= 0x0100,
+	DD_VIDEO_SIZE_352X240		= 0x0200,
+	DD_VIDEO_SIZE_480X240		= 0x0400,
+	DD_VIDEO_SIZE_704X480		= 0x0800,
+	DD_VIDEO_SIZE_704X576		= 0x1000,
+	DD_VIDEO_SIZE_960X480		= 0x2000,
+	DD_VIDEO_SIZE_960X576		= 0x4000,
+	DD_VIDEO_SIZE_960X1080		= 0x8000,
+	DD_VIDEO_SIZE_1280X720		= 0x00010000,
+	DD_VIDEO_SIZE_1600X1200		= 0x00020000,
+	DD_VIDEO_SIZE_1920X1536		= 0x00040000,
+	DD_VIDEO_SIZE_2048X1536		= 0x00080000,
+	DD_VIDEO_SIZE_2304X1296		= 0x00100000,
+	DD_VIDEO_SIZE_2560X1440		= 0x00200000,
+	DD_VIDEO_SIZE_2592X1520		= 0x00400000,
+	DD_VIDEO_SIZE_2592X1944		= 0x00800000,
+	DD_VIDEO_SIZE_3840X2160		= 0x01000000,
+    DD_VIDEO_SIZE_352x288		= 0x02000000,
+}DD_VIDEO_SIZE_N9000;
+
+const unsigned int DD_INVALID_CLIENT_ID	= (~0x0);
+const unsigned int DD_LOCAL_CLIENT_ID		= 0;
+const unsigned int DD_LOCAL_DEVICE_ID		= 0;
+
+
+typedef enum _dd_ptz_config_e_
+{
+    DD_PTZ_CONFIG_PRESET    = 0x1,
+    DD_PTZ_CONFIG_CRUISE,
+    DD_PTZ_CONFIG_CRUISE_POINT,
+}DD_PTZ_CONFIG_E;
+
+#ifdef __CHONGQING_ZHONGRAN__
+
+const unsigned int DD_MAX_CERTIFICATE_NUM = 64;
+#else
+const unsigned int DD_MAX_CERTIFICATE_NUM = 20;
+#endif
 #endif //__DVR_DVS_TYPEDEF_H__
 //end

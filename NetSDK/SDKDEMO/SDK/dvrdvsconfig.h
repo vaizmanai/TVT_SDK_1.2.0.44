@@ -433,7 +433,7 @@ typedef struct _dd_account_config_
 	unsigned char alarmOutCtrl;		//报警输出控制
 	unsigned char netAlarm;			//网络报警
 	unsigned char netSerialCtrl;	//网络串口控制
-
+	
 	unsigned char authLive;
 	unsigned char authRecord;
 	unsigned char authPlayback;
@@ -651,7 +651,7 @@ typedef enum dd_config_item_id
 	DD_CONFIG_ITEM_NETWORK_DDNS,			//DD_DDNS_CONFIG
 	DD_CONFIG_ITEM_DDNS_SERVER_INFO,		//DD_DDNS_SERVER_INFO
 	DD_CONFIG_ITEM_NETWORK_SMTP,			//DD_SMTP_CONFIG
-	//2012-3-15增加DVR主动注册的功能
+//2012-3-15增加DVR主动注册的功能
 	DD_CONFIG_ITEM_AUTO_REPORT,				//DD_AUTO_REPORT
 	DD_CONFIG_ITEM_NETWORK_END,
 
@@ -746,7 +746,7 @@ typedef struct _dec_network_config
 	unsigned long	IP;				//网络地址
 	unsigned long	subnetMask;		//子网掩码
 	unsigned long	gateway;		//网关
-
+	
 	unsigned short httpPort;		//HTTP端口
 	unsigned short decoderPort;			//解码器端口
 	char MAC [8];					//被绑定的物理地址
@@ -768,7 +768,7 @@ typedef struct _dec_advance_network
 	unsigned char mday;
 	unsigned char month;
 	unsigned short year;//2008~2025
-
+	
 	bool	enableFlag;		//NTP使能标识
 	char	name [132];			//NTP服务器的网址。
 	int		NTP_Port;			//NTP服务器的端口

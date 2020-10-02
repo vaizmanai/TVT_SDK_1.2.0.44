@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Grid Ctrl">
+      <UniqueIdentifier>{eb283bfe-d17e-4658-9640-f70a8a606ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grid Ctrl\cell">
+      <UniqueIdentifier>{5f646a4e-8d38-4f97-b35f-722668c817a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml">
+      <UniqueIdentifier>{8a14bd82-74c1-4ff3-baaf-17a68c8fc181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="header\sdk">
+      <UniqueIdentifier>{477eca18-417f-4291-8584-7cd016155783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BackupDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectModeDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="CruiseDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="driveinfo.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderDialog.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="FormatDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="LiveDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MyWaveOut.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayBackDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeFile.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKDEMO.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKDEMODlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="StringConversion.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDlg.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\GridCell.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\GridCellBase.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\GridCtrl.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\GridDropTarget.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\InPlaceEdit.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\TitleTip.cpp">
+      <Filter>Grid Ctrl</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\cell\GridCellCheck.cpp">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\cell\GridCellCombo.cpp">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\cell\GridCellDateTime.cpp">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\cell\GridCellNumeric.cpp">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid\cell\GridURLCell.cpp">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinystr.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxml.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BackupDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigHelpers.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectModeDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="CruiseDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderDialog.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="FormatDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="LiveDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayBackDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeFile.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKDEMO.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKDEMODlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="strdef.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="StringConversion.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolDlg.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\decoderdefine.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="driveinfo.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\DVR_NET_SDK.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\dvrdvsconfig.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\dvrdvsdefine.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\dvrdvstypedef.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="MyWaveOut.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\PTZ.h">
+      <Filter>header\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\CellRange.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\GridCell.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\GridCellBase.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\GridCtrl.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\GridDropTarget.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\InPlaceEdit.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\MemDC.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\TitleTip.h">
+      <Filter>Grid Ctrl</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\cell\GridCellCheck.h">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\cell\GridCellCombo.h">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\cell\GridCellDateTime.h">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\cell\GridCellNumeric.h">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid\cell\GridURLCell.h">
+      <Filter>Grid Ctrl\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinystr.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinyxml.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bitmap_p.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00001.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00002.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00003.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00004.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00005.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00006.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\bmp00007.bmp">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="res\SDKDEMO.ico">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\SDKDEMO.rc2">
+      <Filter>resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SDKDEMO_EN.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\XPStyle.manifest" />
+  </ItemGroup>
+</Project>

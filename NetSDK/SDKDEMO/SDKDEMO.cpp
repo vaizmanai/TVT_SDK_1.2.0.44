@@ -89,7 +89,7 @@ BOOL CSDKDEMOApp::InitInstance()
 #ifdef USER_DEVICE_SERACH
 					dlg.SetDeviceInfo(deviceDlg->GetIp(), deviceDlg->GetPort());
 #else
-					dlg.SetDeviceInfo("192.168.3.122", 6036);
+					dlg.SetDeviceInfo("192.168.0.106", 9008);
 #endif
 					dlg.DoModal();
 

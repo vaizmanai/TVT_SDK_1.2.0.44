@@ -616,6 +616,7 @@ NET_SDK_API LONG CALL_METHOD NET_SDK_FindNextEventInfo(LONG lEventHandle,LPNET_S
 NET_SDK_API BOOL CALL_METHOD NET_SDK_FindEventInfoClose(LONG lEventHandle);
 
 
+
 //////////////////////////////////////////////////////////////////////////
 //2012-6-19增加获取设备当前时间接口
 NET_SDK_API BOOL CALL_METHOD NET_SDK_GetDeviceTime(LONG lUserID,DD_TIME *pTime);

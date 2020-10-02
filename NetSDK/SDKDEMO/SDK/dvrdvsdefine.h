@@ -173,7 +173,7 @@ typedef struct _dd_time_
 	unsigned char	mday;		//Day of month (1–31)
 	unsigned char	month;		//Month (0–11; January = 0)
 	unsigned short	year;		//Year (current year minus 1900)
-	int				nTotalseconds;	//总秒数
+	int				nTotalseconds;		//总秒数
 	int				nMicrosecond;	//微秒
 }DD_TIME, *LP_DD_TIME;
 

@@ -13,56 +13,60 @@
 
 #include "dvrdvstypedef.h"
 //////////////////////////////////////////////////////////////////////////
-const unsigned long DD_MAX_CAMERA_NUM	= 128;
-const unsigned long DD_MAX_CAMERA_NUM_BYTE_LEN	= DD_MAX_CAMERA_NUM/8;
-const unsigned long DD_MAX_SERIAL_NUMBER_LEN = 64;
-const unsigned long DD_MAX_VERSION_BUF_LEN = 64;
+const unsigned int DD_MAX_CAMERA_NUM	= 128;
+const unsigned int DD_MAX_CAMERA_NUM_BYTE_LEN	= DD_MAX_CAMERA_NUM/8;
+const unsigned int DD_MAX_SERIAL_NUMBER_LEN = 64;
+const unsigned int DD_MAX_VERSION_BUF_LEN = 64;
 
-const unsigned long	DD_MAX_NAME_LEN		= 64;	
-const unsigned long	DD_MAX_NAME_BUF_LEN	= (DD_MAX_NAME_LEN * 2) + 4;
+const unsigned int	DD_MAX_NAME_LEN		= 64;	
+const unsigned int	DD_MAX_NAME_BUF_LEN	= (DD_MAX_NAME_LEN * 2) + 4;
 
-const unsigned long	DD_MAX_CAMERA_NAME_LEN		= 64;	
-const unsigned long	DD_MAX_CAMERA_NAME_BUF_LEN	= (DD_MAX_CAMERA_NAME_LEN * 2) + 4;
+const unsigned int	DD_MAX_CAMERA_NAME_LEN		= 64;	
+const unsigned int	DD_MAX_CAMERA_NAME_BUF_LEN	= (DD_MAX_CAMERA_NAME_LEN * 2) + 4;
 
-const unsigned long DD_MAX_URL_LEN		= 256;
-const unsigned long DD_MAX_URL_BUF_LEN	= DD_MAX_URL_LEN + 4;
+const unsigned int DD_MAX_URL_LEN		= 256;
+const unsigned int DD_MAX_URL_BUF_LEN	= DD_MAX_URL_LEN + 4;
 
-const unsigned long DD_MAX_COLOR_CFG_NUM = 3;
+const unsigned int DD_MAX_COLOR_CFG_NUM = 3;
 
-const unsigned long DD_MAX_TEXT_LEN		= 64;
-const unsigned long	DD_MAX_TEXT_BUF_LEN	= (DD_MAX_TEXT_LEN * 2) + 4;
+const unsigned int DD_MAX_TEXT_LEN		= 64;
+const unsigned int	DD_MAX_TEXT_BUF_LEN	= (DD_MAX_TEXT_LEN * 2) + 4;
 
-const unsigned long DD_MAX_VIDEO_COVER_NUM = 3;
+const unsigned int DD_MAX_VIDEO_COVER_NUM = 3;
 
-const unsigned long DD_MAX_USER_NAME_LEN	= 64;
-const unsigned long DD_MAX_USER_NAME_BUF_LEN = (DD_MAX_USER_NAME_LEN * 2) + 4;
-const unsigned long DD_MAX_PASSWORD_LEN		= 128;
-const unsigned long DD_MAX_PASSWORD_BUF_LEN	= DD_MAX_PASSWORD_LEN + 4;
+const unsigned int DD_MAX_USER_NAME_LEN	= 64;
+const unsigned int DD_MAX_USER_NAME_BUF_LEN = (DD_MAX_USER_NAME_LEN * 2) + 4;
+const unsigned int DD_MAX_PASSWORD_LEN		= 128;
+const unsigned int DD_MAX_PASSWORD_BUF_LEN	= DD_MAX_PASSWORD_LEN + 4;
 
-const unsigned long DD_MAX_PPPOE_ACCOUNT_LEN		= 128;
-const unsigned long DD_MAX_PPPOE_ACCOUNT_BUF_LEN	= DD_MAX_PPPOE_ACCOUNT_LEN + 4;
+const unsigned int DD_MAX_PPPOE_ACCOUNT_LEN		= 128;
+const unsigned int DD_MAX_PPPOE_ACCOUNT_BUF_LEN	= DD_MAX_PPPOE_ACCOUNT_LEN + 4;
 
-const unsigned long DD_MAX_DDNS_ACCOUNT_LEN			= 128;
-const unsigned long DD_MAX_DDNS_ACCOUNT_BUF_LEN		= DD_MAX_DDNS_ACCOUNT_LEN + 4;
+const unsigned int DD_MAX_DDNS_ACCOUNT_LEN			= 128;
+const unsigned int DD_MAX_DDNS_ACCOUNT_BUF_LEN		= DD_MAX_DDNS_ACCOUNT_LEN + 4;
 
-const unsigned long DD_MAX_EMAIL_RECEIVE_ADDR_NUM = 3;
+const unsigned int DD_MAX_EMAIL_RECEIVE_ADDR_NUM = 3;
 
-const unsigned long DD_MAX_MOTION_AREA_WIDTH_NUM = 1920/16;
-const unsigned long DD_MAX_MOTION_AREA_HIGHT_NUM = ((1080/16) + 3) / 4;
+const unsigned int DD_MAX_MOTION_AREA_WIDTH_NUM = 1920/16;
+const unsigned int DD_MAX_MOTION_AREA_HIGHT_NUM = (1080/16+3)&(~3);
 
-const unsigned long DD_MAX_PRESET_NUM	= 128;
-const unsigned long DD_MAX_CRUISE_NUM	= 32;
-const unsigned long DD_MAX_TRACK_NUM	= 1;
-const unsigned long DD_MAX_ACCOUNT_NUM	= 64;
-const unsigned long DD_MAX_BUF_SIZE = 512*1024;
+const unsigned int DD_MAX_PRESET_NUM	= 128;
+const unsigned int DD_MAX_CRUISE_NUM	= 32;
+const unsigned int DD_MAX_TRACK_NUM	= 1;
+const unsigned int DD_MAX_ACCOUNT_NUM	= 64;
+const unsigned int DD_MAX_BUF_SIZE = 512*1024;
+
+const unsigned int DD_MAX_SUPPORT_RESOLUTION = 7;
+const unsigned int DD_MAX_FACE_INFO_GROUPS = 16;
+const unsigned int DD_MAX_FACE_INFO_IMG = 5;
 //////////////////////////////////////////////////////////////////////////
 
 //设备信息：包含的内容，即可用于配置，也可用于查询设备信息
 typedef struct _dd_device_info_
 {
-	unsigned long	iSize;		//本结构体长度
+	unsigned int	iSize;		//本结构体长度
 
-	unsigned long	deviceID;	//设备ID(0~255)
+	unsigned int	deviceID;	//设备ID(0~255)
 	char			deviceNo[DD_MAX_SERIAL_NUMBER_LEN];		//设备序列号，可能使用字母
 	char			deviceName [DD_MAX_NAME_LEN];			//设备名称（注意考虑双字节字符）
 
@@ -92,30 +96,30 @@ typedef struct _dd_device_info_
 
 typedef struct _dd_basic_config_
 {
-	unsigned long iSize;				//本结构体长度
+	unsigned int iSize;				//本结构体长度
 
-	unsigned long videoFormat;			//视频制式，取值参考DD_VIDEO_FORMAT
+	unsigned int videoFormat;			//视频制式，取值参考DD_VIDEO_FORMAT
 
-	unsigned long videoOut;				//视频输出设备
-	unsigned long videoOutResolution;	//输出分辨率，取值参考DD_VGA_RESOLUTION
-	unsigned long VGARefresh;			//VGA刷新率
-	unsigned long screensaver;			//屏保时间（零表示不开启）
+	unsigned int videoOut;				//视频输出设备
+	unsigned int videoOutResolution;	//输出分辨率，取值参考DD_VGA_RESOLUTION
+	unsigned int VGARefresh;			//VGA刷新率
+	unsigned int screensaver;			//屏保时间（零表示不开启）
 
-	unsigned long deviceLanguage;		//系统语言
-	unsigned long passwordCheck;		//是否开启密码检查
+	unsigned int deviceLanguage;		//系统语言
+	unsigned int passwordCheck;		//是否开启密码检查
 
-	unsigned long RecycleRecord;		//是否允许覆盖录像
+	unsigned int RecycleRecord;		//是否允许覆盖录像
 
 	//以下为一些只读项
-	unsigned long videoFormatMask;			//支持的视频制式掩码（只读），取值为DD_VIDEO_FORMAT定义数据的掩码组合
-	unsigned long videoOutMask;				//支持的视频输出设备掩码（只读）
-	unsigned long videoOutResolutionMask;	//支持的视频输出设备分辨率掩码（只读），取值为DD_VGA_RESOLUTION定义数据的掩码组合
-	unsigned long languageMask;				//支持的语言掩码（只读）
+	unsigned int videoFormatMask;			//支持的视频制式掩码（只读），取值为DD_VIDEO_FORMAT定义数据的掩码组合
+	unsigned int videoOutMask;				//支持的视频输出设备掩码（只读）
+	unsigned int videoOutResolutionMask;	//支持的视频输出设备分辨率掩码（只读），取值为DD_VGA_RESOLUTION定义数据的掩码组合
+	unsigned int languageMask;				//支持的语言掩码（只读）
 }DD_BASIC_CONFIG;
 
 typedef struct _dd_date_time_config
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned char dateFormat;	//日期格式，取值为DD_DATE_MODE
 	unsigned char timeFormat;	//时间格式，12代表12小时制，24代表24小时制
@@ -123,7 +127,8 @@ typedef struct _dd_date_time_config
 
 	unsigned char enableNTP;	//是否开启NTP同步服务
 	unsigned short	ntpPort;	//NTP端口
-	unsigned short	recv;
+    unsigned char   daylightSwitch;//only n9000
+    unsigned char	recv;
 	char	ntpServerAddr[DD_MAX_URL_BUF_LEN];	//NTP服务器地址
 }DD_DATE_TIME_CONFIG;
 
@@ -145,10 +150,10 @@ typedef struct _dd_daylight_info_
 	unsigned short enable;		//是否开启夏令时功能
 	unsigned short type;		//夏令时设置方式：周或者日期方式
 
-	unsigned long InSecond;		//进入DST一天内的秒偏移（0～86399），可转换成时分秒
-	unsigned long OutSecond;	//出DST一天内的秒偏移（0～86399），可转换成时分秒
+	unsigned int InSecond;		//进入DST一天内的秒偏移（0～86399），可转换成时分秒
+	unsigned int OutSecond;	//出DST一天内的秒偏移（0～86399），可转换成时分秒
 
-	unsigned long offSet;		//夏令时的偏移量（0～86399）秒。
+	unsigned int offSet;		//夏令时的偏移量（0～86399）秒。
 
 }DD_DAYLIGHT_INFO;
 
@@ -157,7 +162,7 @@ typedef struct _dd_live_video_group_
 	unsigned short	holdTime;	//停留时间（秒）,零表示无效
 	unsigned short	channelNum;	//有效通道数目（只读）
 
-	unsigned long	splitMode;	//分割模式，取值参考DD_VIEW_SPLIT_MODE
+	unsigned int	splitMode;	//分割模式，取值参考DD_VIEW_SPLIT_MODE
 
 	//各区域对应的通道编号，数组下标代表通道编号，元素值代表窗体区域编号
 	//0xff表示该通道无效
@@ -173,34 +178,34 @@ typedef struct _dd_live_audio_group_
 
 typedef struct _dd_live_display_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
-	unsigned long showTime;			//是否显示系统时间
-	unsigned long showNetwork;		//是否显示网络状态
-	unsigned long showHDD;			//是否显示硬盘信息
-	unsigned long showUSB;			//是否显示移动存储器信息
+	unsigned int showTime;			//是否显示系统时间
+	unsigned int showNetwork;		//是否显示网络状态
+	unsigned int showHDD;			//是否显示硬盘信息
+	unsigned int showUSB;			//是否显示移动存储器信息
 
 	unsigned short	alarmInNum;		//报警输入数目（只读）
 	unsigned short	alarmOutNum;	//报警输出数目（只读）
-	unsigned long	showAlarmIn;	//是否显示报警输入信息	
-	unsigned long	showAlarmOut;	//是否显示报警输出信息
+	unsigned int	showAlarmIn;	//是否显示报警输入信息	
+	unsigned int	showAlarmOut;	//是否显示报警输出信息
 
-	unsigned long cameraNum;		//有效通道数目（只读）
+	unsigned int cameraNum;		//有效通道数目（只读）
 	unsigned char showCameraName [DD_MAX_CAMERA_NUM];	//是否显示通道名称
 	unsigned char showRecordStatus [DD_MAX_CAMERA_NUM];	//是否显示录像状态
 }DD_LIVE_DISPLAY;
 
 typedef struct _dd_channel_config_
 {
-	unsigned long iSize;						//本结构体长度
+	unsigned int iSize;						//本结构体长度
 
-	unsigned long hide;							//是否隐藏通道
+	unsigned int hide;							//是否隐藏通道
 	char	name [DD_MAX_CAMERA_NAME_BUF_LEN];	//通道名称
 }DD_CHANNEL_CONFIG;
 
 typedef struct _dd_video_color_
 {
-	unsigned long	startTime;		//此套色彩对应的开始时间（一天内相对时间）
+	unsigned int	startTime;		//此套色彩对应的开始时间（一天内相对时间）
 
 	unsigned char	brightness;		//亮度
 	unsigned char	hue;			//色度
@@ -210,9 +215,9 @@ typedef struct _dd_video_color_
 
 typedef struct _dd_video_color_config_
 {
-	unsigned long	iSize;			//本结构体长度
+	unsigned int	iSize;			//本结构体长度
 
-	unsigned long	usedNum;		//使用的方案数目，默认为一
+	unsigned int	usedNum;		//使用的方案数目，默认为一
 	DD_VIDEO_COLOR	videoColor[DD_MAX_COLOR_CFG_NUM];	//色彩方案
 }DD_VIDEO_COLOR_CONFIG;
 
@@ -233,7 +238,7 @@ typedef struct _dd_area_
 
 typedef struct _dd_video_osd_config_
 {
-	unsigned long iSize;					//本结构体长度
+	unsigned int iSize;					//本结构体长度
 
 	unsigned char enableCameraName;			//叠加通道名称
 	unsigned char enableTimeStamp;			//叠加时间戳
@@ -243,18 +248,21 @@ typedef struct _dd_video_osd_config_
 	DD_POSITION cameraName;					//通道名称的位置
 	DD_POSITION timeStamp;					//时间戳的位置
 	DD_POSITION defineText;					//自定义文本的位置
-	char text [DD_MAX_TEXT_BUF_LEN];		//自定义文本
+    char cameraNameText [DD_MAX_CAMERA_NAME_LEN];		//叠加通道名
+    char text [DD_MAX_TEXT_LEN];		//自定义文本
+    char timeFormat;                    //时间格式
+    char recv[3];
 
 	struct  
 	{
-		unsigned long	enable;				//区域覆盖是否有效
+		unsigned int	enable;				//区域覆盖是否有效
 		DD_AREA			area;				//区域参数
 	}cover[DD_MAX_VIDEO_COVER_NUM];			//覆盖的区域参数
 }DD_VIDEO_OSD_CONFIG;
 
 typedef struct _dd_encode_config_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned short resolution;	//分辨率，取值参考DD_VIDEO_SIZE
 	unsigned short rate;		//帧率
@@ -265,9 +273,62 @@ typedef struct _dd_encode_config_
 	unsigned short maxBitrate;	//码流上限
 }DD_ENCODE_CONFIG;
 
+typedef struct _dd_encode_config_n9000_
+{
+	unsigned int iSize;		//本结构体长度
+
+	unsigned int resolution;	//分辨率，取值参考DD_VIDEO_SIZE
+	unsigned short rate;		//帧率
+	unsigned short encodeType;	//编码类型，取值参考DD_VIDEO_ENCODE_MODE
+	unsigned short quality;		//画质，取值参考DD_IMAGE_QUALITY
+
+	unsigned short minBitrate;	//码流下限
+	unsigned short maxBitrate;	//码流上限
+    unsigned short encodeFormat;  //编码264or265 DD_VIDEO_ENCODE_FORMAT
+}DD_ENCODE_CONFIG_N9000;
+
+
+typedef struct _dd_encode_config_ex_
+{
+    unsigned int iSize;		//本结构体长度
+
+    unsigned int resolution;	//分辨率，取值参考DD_VIDEO_SIZE
+    unsigned short rate;		//帧率
+    unsigned short encodeType;	//编码类型，取值参考DD_VIDEO_ENCODE_MODE
+    unsigned short quality;		//画质，取值参考DD_IMAGE_QUALITY
+
+    unsigned short minBitrate;	//码流下限
+    unsigned short maxBitrate;	//码流上限
+    unsigned short bitrate; //码率
+    unsigned short encodeFormat;  //编码264or265 DD_VIDEO_ENCODE_FORMAT
+    char recv[14];			//保留字节
+}DD_ENCODE_CONFIG_EX;
+
+typedef struct _dd_encode_config_n9000_ex_
+{
+    unsigned int iSize;		//本结构体长度
+
+    unsigned int resolution;	//分辨率，取值参考DD_VIDEO_SIZE
+    unsigned short rate;		//帧率
+    unsigned short encodeType;	//编码类型，取值参考DD_VIDEO_ENCODE_MODE
+    unsigned short quality;		//画质，取值参考DD_IMAGE_QUALITY
+
+    unsigned short minBitrate;	//码流下限
+    unsigned short maxBitrate;	//码流上限
+    unsigned short bitrateRange[16]; //支持的码率项
+}DD_ENCODE_CONFIG_N9000_Ex;
+
+
+
+typedef struct _dd_encode_config_support_
+{
+	DD_ENCODE_CONFIG encodeConfig[DD_MAX_SUPPORT_RESOLUTION];
+	unsigned int num;
+}DD_ENCODE_CONFIG_SUPPORT;
+
 typedef struct _dd_record_config_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
 	unsigned char bOnlyVideo;		//录制视频（仅视频）
 	unsigned char bWithAudio;		//录制音频（基于录制视频的基础上）
@@ -284,7 +345,7 @@ typedef struct _dd_record_config_
 //此结构体为（只读）内容，用于查询设备支持参数。
 typedef struct _dd_record_config_mask_
 {
-	unsigned long iSize;
+	unsigned int iSize;
 
 	unsigned char bindAudioChannel;	//是否支持视音频通道绑定
 	unsigned char bRedundancy;		//是否支持冗余录制
@@ -315,25 +376,25 @@ typedef struct _dd_week_schedule_
 
 typedef struct _dd_network_ip_config_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
-	unsigned long	useDHCP;		//是否使用动态网络地址
+	unsigned int	useDHCP;		//是否使用动态网络地址
 
-	unsigned long	IP;				//网络地址
-	unsigned long	subnetMask;		//子网掩码
-	unsigned long	gateway;		//网关
+	unsigned int	IP;				//网络地址
+	unsigned int	subnetMask;		//子网掩码
+	unsigned int	gateway;		//网关
 
-	unsigned long	preferredDNS;	//主网络域名服务器地址
-	unsigned long	alternateDNS;	//从网络域名服务器地址
+	unsigned int	preferredDNS;	//主网络域名服务器地址
+	unsigned int	alternateDNS;	//从网络域名服务器地址
 
-	unsigned long	usePPPoE;		//是否使用PPPoE
+	unsigned int	usePPPoE;		//是否使用PPPoE
 	char account[DD_MAX_PPPOE_ACCOUNT_BUF_LEN];	//PPPoE的帐号
 	char password[DD_MAX_PASSWORD_BUF_LEN];		//PPPoE的密码
 }DD_NETWORK_IP_CONFIG;
 
 typedef struct _dd_network_advance_config_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
 	unsigned char bMessagePort;		//是否支持消息端口（只读）
 	unsigned char bAlarmPort;		//是否支持报警端口（只读）
@@ -348,20 +409,20 @@ typedef struct _dd_network_advance_config_
 	unsigned short maxOnlineUserNum;	//支持的最大在线用户数目（只读）
 	unsigned short OnlineUserNum;		//在线用户数目
 
-	unsigned long multiCastIP;		//多播地址
-	unsigned long mtuByteNum;		//MTU字节数
+	unsigned int multiCastIP;		//多播地址
+	unsigned int mtuByteNum;		//MTU字节数
 }DD_NETWORK_ADVANCE_CONFIG;
 
 typedef struct _dd_ddns_config_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
 	unsigned short enable;			//是否启用DDNS
 	unsigned short interval;		//上报更新周期
 
-	unsigned long useDDNSServer;	//使用的DDNS服务器类型或者地址
+	unsigned int useDDNSServer;	//使用的DDNS服务器类型或者地址
 
-	unsigned long userHostDomain;	//是否服务器主机域名
+	unsigned int userHostDomain;	//是否服务器主机域名
 
 	char userName [DD_MAX_DDNS_ACCOUNT_BUF_LEN];	//DDNS帐号
 	char password [DD_MAX_PASSWORD_BUF_LEN];		//DDNS密码
@@ -379,7 +440,7 @@ typedef struct _dd_ddns_server_info
 
 typedef struct _dd_smtp_config_
 {
-	unsigned long iSize;				//本结构体长度
+	unsigned int iSize;				//本结构体长度
 
 	unsigned short port;				//邮件服务端口
 	unsigned short enableSSL;			//是否启用SSL检查
@@ -389,24 +450,24 @@ typedef struct _dd_smtp_config_
 	char sendAddress [DD_MAX_URL_BUF_LEN];	//发送邮件地址
 	char password [DD_MAX_PASSWORD_BUF_LEN];//帐号密码
 
-	unsigned long enableRecvAddrNum;		//可用的接收地址数目（只读）
+	unsigned int enableRecvAddrNum;		//可用的接收地址数目（只读）
 	char receiveAddress [DD_MAX_EMAIL_RECEIVE_ADDR_NUM][DD_MAX_URL_BUF_LEN];//接收地址列表
 }DD_SMTP_CONFIG;
 
 typedef struct _dd_auto_report_
 {
-	unsigned long   bUse;			//是否启用自动上报注册功能
+	unsigned int   bUse;			//是否启用自动上报注册功能
 	char			host[256];		//注册的平台服务器地址
-	unsigned long	dwPort;			//注册的平台服务器端口
-	unsigned long	ID;				//分配的注册ID
+	unsigned int	dwPort;			//注册的平台服务器端口
+	unsigned int	ID;				//分配的注册ID
 }DD_AUTO_REPORT;
 typedef struct _dd_account_config_
 {
-	unsigned long iSize;			//本结构体长度
+	unsigned int iSize;			//本结构体长度
 
-	unsigned long enable;			//是否启用该帐号
-	unsigned long bindMAC;			//是否绑定物理地址
-	unsigned long group;			//所属群组，取值参考DD_USER_GROUP
+	unsigned int enable;			//是否启用该帐号
+	unsigned int bindMAC;			//是否绑定物理地址
+	unsigned int group;			//所属群组，取值参考DD_USER_GROUP
 
 	char MAC [8];					//被绑定的物理地址
 	char name [DD_MAX_USER_NAME_BUF_LEN];	//用户名称
@@ -458,7 +519,7 @@ typedef struct _dd_trigger_alarm_out_
 	unsigned char sendEmail;				//发送邮件
 	unsigned char toUploadToAlarmCentre;	//上传到报警中心
 
-	unsigned long toAlarmOut;				//报警输出（比特位对应输出设备）
+	unsigned int toAlarmOut;				//报警输出（比特位对应输出设备）
 }DD_TRIGGER_ALARM_OUT;
 
 typedef struct _dd_trigger_record_
@@ -478,7 +539,7 @@ typedef struct _dd_trigger_ptz_
 
 typedef struct _dd_sensor_config_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned char	enable;		//是否启用侦测
 	unsigned char	bNO;		//设备类型：常开或者常闭
@@ -489,7 +550,7 @@ typedef struct _dd_sensor_config_
 
 typedef struct _dd_motion_area_
 {
-	unsigned long sensitivity;		//灵敏度（0～7），数字越大灵敏度越高
+	unsigned int sensitivity;		//灵敏度（0～7），数字越大灵敏度越高
 
 	unsigned short widthNum;		//区域的横向栅格数目
 	unsigned short heightNum;		//区域的纵向栅格数目
@@ -500,7 +561,7 @@ typedef struct _dd_motion_area_
 
 typedef struct _dd_motion_config_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned char	enable;		//是否启用移动侦测
 	unsigned char	recv;		//保留字节
@@ -530,37 +591,37 @@ typedef struct _dd_relay_config_
 
 typedef struct _dd_serial_config_
 {
-	unsigned long baudRate;			//波特率
-	unsigned long dataBit;			//数据位
-	unsigned long stopBit;			//停止位
-	unsigned long parity;			//奇偶校验位
-	unsigned long dataFlowControl;	//数据流控制
+	unsigned int baudRate;			//波特率
+	unsigned int dataBit;			//数据位
+	unsigned int stopBit;			//停止位
+	unsigned int parity;			//奇偶校验位
+	unsigned int dataFlowControl;	//数据流控制
 }DD_SERIAL_CONFIG;
 
 typedef struct _dd_ptz_config_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned char enable;		//是否启用云台功能
 	unsigned char address;		//地址
 	unsigned char recv1;		//保留字节
 	unsigned char recv2;		//保留字节
 
-	unsigned long protocol;		//协议
+	unsigned int protocol;		//协议
 
 	DD_SERIAL_CONFIG serial;	//串口
 }DD_PTZ_CONFIG;
 
 typedef struct _dd_ptz_protocol_info 
 {
-	unsigned long  protocolID;		//对应的协议类型ID
-	unsigned long  protocolProperty;//支持的除ID、波特率之外的其它属性的MASK,比如是否支持轨迹等特殊属性
+	unsigned int  protocolID;		//对应的协议类型ID
+	unsigned int  protocolProperty;//支持的除ID、波特率之外的其它属性的MASK,比如是否支持轨迹等特殊属性
 	char           ProtocolName[64];//协议名称
 }DD_PTZ_PROTOCOL_INFO;
 
 typedef struct _dd_ptz_preset_config_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	//预置点掩码
 	unsigned char enablePreset [DD_MAX_PRESET_NUM];
@@ -573,32 +634,77 @@ typedef struct _dd_config_item_head_
 	unsigned short	num;		//元素数目，比如多少个通道，每个通道对应一个元素
 	unsigned short	subLen;		//每个元素的长度
 	unsigned short recv;
-	unsigned long	len;		//数据总长度
+	unsigned int	len;		//数据总长度
 }DD_CONFIG_ITEM_HEAD;
 
 
 typedef struct _dd_config_block_head_
 {
-	unsigned long	biSize;		//本结构体长度
-	unsigned long	ItemNum;	//元素数目
-	unsigned long	netcfgver;	//当前定义的版本号，设备端固定传输DD_CONFIG_VERSION，客户端根据需要动态判断
+	unsigned int	biSize;		//本结构体长度
+	unsigned int	ItemNum;	//元素数目
+	unsigned int	netcfgver;	//当前定义的版本号，设备端固定传输DD_CONFIG_VERSION，客户端根据需要动态判断
 }DD_CONFIG_BLOCK_HEAD;
 
 typedef struct _dd_config_item_head_ex_
 {
 	DD_CONFIG_ITEM_HEAD		item_head;
-	unsigned long			start_pos;		//文件中偏移
+	unsigned int			start_pos;		//文件中偏移
 }DD_CONFIG_ITEM_HEAD_EX;		
 
 typedef struct _dd_config_block_info_
 {
 	DD_CONFIG_ITEM_HEAD_EX	itemHead;
-	unsigned long			off;			//缓存中偏移
+	unsigned int			off;			//缓存中偏移
 }DD_CONFIG_BLOCK_INFO;
 
-//////////////////////////////////////////////////////////////////////////
-const unsigned long		DD_CONFIG_VERSION	= 20101123;
+typedef struct _alarm_status
+{
+    unsigned int iSize;					//本结构体长度
+    int chanl;	//报警通道，跟通道无关的报警是-1， 跟通道相关的是通道，io之类的报警是个数
+    unsigned int alarmType;	//报警事件 NET_SDK_N9000_ALARM_TYPE
 
+}DD_ALARM_STATUS_INFO;
+
+typedef struct _network_platform
+{
+	//N9000支持国标和平台软件两种平台，ipc可忽略国标
+	unsigned int CurrentPlat;	//当前平台，默认为1，表示平台软件，2表示国标
+
+	//平台软件
+	unsigned int Switcher;	//1表示启用，0表示未启用
+	unsigned int Port;			//端口
+	unsigned int ReportId;	//设备ID
+	char szAddress[16];			//ip地址
+
+	//国标平台，ipc不使用，N9000使用
+	unsigned int SwitchGB;	//1表示启用，0表示未启用
+	unsigned int PortGB;		//端口
+	unsigned int uLocalPort;	//本地端口
+	char szRelm[16];				//sip服务器域
+	char szAddressGB[16];	//地址
+	char szUserName[16];		//用户名
+	char szPassword[16];		//密码
+	char szDeviceIdGB[32];	//设备ID
+	char szServerIdGB[32];	//sip服务器ID
+}DD_NETWORK_PLATFORM;
+
+typedef struct _dd_smart_vfd_config_
+{
+	unsigned int iSize;					   //本结构体长度
+
+	unsigned char  enableFaceDetect;        //是否开启人脸检测
+	unsigned char  enableSaveFacePicture;   //是否保存人脸图片
+	unsigned short enableSaveSourcePicture; //是否保存人脸检测源图片
+	unsigned int   holdTime;                //持续时间
+	DD_POSITION    startPoint;              //矩形的左上点坐标信息
+	DD_POSITION    endPoint;                //矩形的右下点坐标信息
+	unsigned int   pushModeType;            //抓拍模式，0：自动模式，不会重复抓拍， 1：以固定时间间隔进行抓拍的模式
+	unsigned int   intervalTime;            //抓拍的间隔周期，单位秒，仅在抓拍模式为1的情况下有效
+}DD_SMART_VFD_CONFIG;
+
+//////////////////////////////////////////////////////////////////////////
+const unsigned int		DD_CONFIG_VERSION	= 20101123;
+const unsigned int	DD_CONFIG_ITEM_FOR_SDK_DEFINE  = 0xf000; //这里定义sdk内部使用的命令 使用方式DD_CONFIG_ITEM_FOR_SDK_DEFINE+DD_CONFIG_ITEM_ID//对现有不满足后面的版本需求的消息，内部增加消息字段使之解析成不同结构体
 typedef enum dd_config_item_id
 {
 	DD_CONFIG_ITEM_SYSTEM_BASE=0x0100,
@@ -622,11 +728,13 @@ typedef enum dd_config_item_id
 	DD_CONFIG_ITEM_CHNN_END,
 
 	DD_CONFIG_ITEM_ENCODE_BASE=0x0400,
-	DD_CONFIG_ITEM_ENCODE_MASK_MAJOR,		//DD_ENCODE_CONFIG
-	DD_CONFIG_ITEM_ENCODE_MASK_MINOR,		//DD_ENCODE_CONFIG
+	DD_CONFIG_ITEM_ENCODE_MASK_MAJOR,		//DD_ENCODE_CONFIG_SUPPORT
+	DD_CONFIG_ITEM_ENCODE_MASK_MINOR,		//DD_ENCODE_CONFIG_SUPPORT
 	DD_CONFIG_ITEM_ENCODE_SCHEDULE,			//DD_ENCODE_CONFIG * VIDEO_INPUT_NUM
 	DD_CONFIG_ITEM_ENCODE_ALARM,			//DD_ENCODE_CONFIG * VIDEO_INPUT_NUM
 	DD_CONFIG_ITEM_ENCODE_NETWORK,			//DD_ENCODE_CONFIG * VIDEO_INPUT_NUM
+    DD_CONFIG_ITEM_ENCODE_SCHEDULE_EX,			//DD_ENCODE_CONFIG_EX * VIDEO_INPUT_NUM
+    DD_CONFIG_ITEM_ENCODE_NETWORK_EX,			//DD_ENCODE_CONFIG_EX * VIDEO_INPUT_NUM
 	DD_CONFIG_ITEM_ENCODE_END,
 
 	DD_CONFIG_ITEM_RECORD_BASE=0x0500,
@@ -645,6 +753,7 @@ typedef enum dd_config_item_id
 	DD_CONFIG_ITEM_NETWORK_SMTP,			//DD_SMTP_CONFIG
 //2012-3-15增加DVR主动注册的功能
 	DD_CONFIG_ITEM_AUTO_REPORT,				//DD_AUTO_REPORT
+	DD_CONFIG_ITEM_NETWORK_PLATFORM,//平台ip设置
 	DD_CONFIG_ITEM_NETWORK_END,
 
 	DD_CONFIG_ITEM_ACCOUNT_BASE=0x0700,
@@ -704,27 +813,32 @@ typedef enum dd_config_item_id
 	DD_DECODER_CONFIG_SENSOR_SCHEDULE,		//DEC_WEEK_SCHEDULE * VIDEO_INPUT_NUM
 	DD_DECODER_CONFIG_OTHER_ALARMOUT,		//DEC_OTHER_ALARM* VIDEO_INPUT_NUM
 
+    DD_ITEM_ALARM_STATUS =0x0f00, //当前报警状态，仅N9000  DD_ALARM_STATUS_INFO * NUM
+
+	DD_CONFIG_ITEM_SMART_BASE=0x1000,
+	DD_CONFIG_ITEM_SMART_VFD, //人脸侦测 DD_SMART_VFD_CONFIG * VIDEO_INPUT_NUM
+
 	DD_CONFIG_ITEM_END
 }DD_CONFIG_ITEM_ID;
 
 ///////////////////////////////////////
 
 
-const unsigned long DEC_MAX_NAME_LEN = 64;
-const unsigned long DEC_MAX_VERSION_BUF_LEN = 64;
-const unsigned long DEC_MAX_BUF_LEN = (DEC_MAX_NAME_LEN * 2) + 4;
+const unsigned int DEC_MAX_NAME_LEN = 64;
+const unsigned int DEC_MAX_VERSION_BUF_LEN = 64;
+const unsigned int DEC_MAX_BUF_LEN = (DEC_MAX_NAME_LEN * 2) + 4;
 
 typedef struct _dec_device_config
 {
-	unsigned long	iSize;		//本结构体长度
+	unsigned int	iSize;		//本结构体长度
 
 	char			deviceName [DEC_MAX_NAME_LEN];			//设备名称（注意考虑双字节字符）
-	unsigned long	channelNum;								//解码器通道总数
-	unsigned long	productID;								//产品ID号
-	unsigned long	productSubID;							//产品子ID号
+	unsigned int	channelNum;								//解码器通道总数
+	unsigned int	productID;								//产品ID号
+	unsigned int	productSubID;							//产品子ID号
 	//以下为只读项
 	//version
-	unsigned long	softVersion;							//软件版本号
+	unsigned int	softVersion;							//软件版本号
 	char			mcuVersion [DEC_MAX_VERSION_BUF_LEN];			//MCU版本
 	char			kernelVersion [DEC_MAX_VERSION_BUF_LEN];	//内核版本
 	char			hardwareVersion [DEC_MAX_VERSION_BUF_LEN];	//硬件版本
@@ -733,25 +847,25 @@ typedef struct _dec_device_config
 
 typedef struct _dec_network_config
 {	
-	unsigned long	iSize;		//本结构体长度
+	unsigned int	iSize;		//本结构体长度
 
-	unsigned long	IP;				//网络地址
-	unsigned long	subnetMask;		//子网掩码
-	unsigned long	gateway;		//网关
+	unsigned int	IP;				//网络地址
+	unsigned int	subnetMask;		//子网掩码
+	unsigned int	gateway;		//网关
 	
 	unsigned short httpPort;		//HTTP端口
 	unsigned short decoderPort;			//解码器端口
 	char MAC [8];					//被绑定的物理地址
-	unsigned long multiCastIP;		//多播地址
-	unsigned long bDHCP;
+	unsigned int multiCastIP;		//多播地址
+	unsigned int bDHCP;
 
-	unsigned long dns1;				//DNS1
-	unsigned long dns2;				//DNS2
+	unsigned int dns1;				//DNS1
+	unsigned int dns2;				//DNS2
 }DEC_NETWORK_CONFIG;
 
 typedef struct _dec_advance_network
 {
-	unsigned long	iSize;		//本结构体长度
+	unsigned int	iSize;		//本结构体长度
 
 	unsigned char TimeZone; //时区
 	unsigned char hour;
@@ -769,25 +883,25 @@ typedef struct _dec_advance_network
 
 typedef struct _dec_sensor_setup_
 {
-	unsigned long iSize;		//本结构体长度
+	unsigned int iSize;		//本结构体长度
 
 	unsigned char	enable;		//是否启用侦测
 	unsigned char	bNO;		//设备类型：常开或者常闭
 	unsigned short	holdTime;	//延迟时间
 
 	char name [DEC_MAX_BUF_LEN];	//设备名称
-	unsigned long  toBuzzer;			//触发蜂鸣器报警
-	unsigned long  toAlarmOut;			//报警输出（比特位对应输出设备）
+	unsigned int  toBuzzer;			//触发蜂鸣器报警
+	unsigned int  toAlarmOut;			//报警输出（比特位对应输出设备）
 }DEC_SENSOR_SETUP;
 
 typedef struct _dec_other_alarm_
 {
-	unsigned long iSize;					//本结构体长度
+	unsigned int iSize;					//本结构体长度
 
-	unsigned long toBuzzerForIPConflict;	//IP冲突触发蜂鸣器
-	unsigned long toAlarmOutForDisconnect;	//IP冲突报警输出（比特位对应输出设备）
-	unsigned long toBuzzerForDisconnect;	//网络断开触发蜂鸣器
-	unsigned long toAlarmOutForIPConflict;	//网络断开报警输出（比特位对应输出设备）
+	unsigned int toBuzzerForIPConflict;	//IP冲突触发蜂鸣器
+	unsigned int toAlarmOutForDisconnect;	//IP冲突报警输出（比特位对应输出设备）
+	unsigned int toBuzzerForDisconnect;	//网络断开触发蜂鸣器
+	unsigned int toAlarmOutForIPConflict;	//网络断开报警输出（比特位对应输出设备）
 }DEC_OTHER_ALARM;
 
 //日排程结构，24代表24小时，unsigned long long的每一位代表每一分钟的状态
@@ -803,3 +917,4 @@ typedef struct _dec_week_schedule_
 }DEC_WEEK_SCHEDULE;
 
 #endif //__DVR_DVS_CONFIG_H__
+
